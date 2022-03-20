@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "464367120044",
+    "project_id": "stocking-shabu-system",
+    "storage_bucket": "stocking-shabu-system.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:464367120044:android:c146ce05288cd538f3b909",
+        "android_client_info": {
+          "package_name": "com.tripleace.stockingshabusystem"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "464367120044-digsr1o2mboq51ubuvoj7j2tfmp3nln4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC-3PkUxRT43spM9kKN7YBD_bW-SZ2AuZM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "464367120044-digsr1o2mboq51ubuvoj7j2tfmp3nln4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
