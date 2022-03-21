@@ -64,21 +64,54 @@ class _orderpageState extends State<orderpage> {
                           color: Colors.black),
                     ),
                   ),
-                  Container(
-                    margin: EdgeInsets.only(right: 20),
-                    width: 50,
-                    height: 50,
-                    child: IconButton(
-                        onPressed: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const stockingpage()),
-                          );
-                        },
-                        icon: Image.asset(
-                          'assets/Icon/stockingOrder.png',
-                        )),
+                  Row(
+                    children: [
+                      Container(
+                        margin: EdgeInsets.only(top: 10, right: 20),
+                        height: 40,
+                        child: TextButton(
+                          style: TextButton.styleFrom(
+                            side: BorderSide(color: Colors.deepOrange, width: 3),
+                            padding: const EdgeInsets.all(16.0),
+                            primary: Colors.deepOrange,
+                            textStyle: const TextStyle(fontSize: 15),
+                          ),
+                          child: const Text('Stocking'),
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => const stockingpage()),
+                            );
+                          },
+                        ),
+                      ),
+                      Container(
+                        margin: EdgeInsets.only(top: 10, right: 100),
+                        height: 40,
+                        child: TextButton(
+                          style: TextButton.styleFrom(
+                            backgroundColor: Colors.deepOrange,
+                            padding: const EdgeInsets.all(16.0),
+                            primary: Colors.white,
+                            textStyle: const TextStyle(fontSize: 15),
+                          ),
+                          child: const Text('Delete all order'),
+                          onPressed: () async {
+                            final orders = await FirebaseFirestore.instance
+                                .collection("order")
+                                .get();
+                            for (var order in orders.docs) {
+                              // print(order.id);
+                              await FirebaseFirestore.instance
+                                  .collection("order")
+                                  .doc(order.id)
+                                  .delete();
+                            }
+                          },
+                        ),
+                      ),
+                    ],
                   ),
                 ],
               ),
@@ -108,8 +141,7 @@ class _orderpageState extends State<orderpage> {
               StreamBuilder<QuerySnapshot>(
                   stream: orderCollect
                       .where("dateTime",
-                          isGreaterThan:
-                              DateTime(now.year , now.month, now.day))
+                          isGreaterThan: DateTime(now.year, now.month, now.day))
                       .snapshots(),
                   builder: (context, snapshot) {
                     if (snapshot.connectionState == ConnectionState.waiting) {
