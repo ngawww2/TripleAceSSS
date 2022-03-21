@@ -4,18 +4,19 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:shabusystem/helpers/dialog_helper.dart';
 import 'package:shabusystem/model/menu.dart';
 import 'package:shabusystem/model/order.dart';
-import 'package:shabusystem/screen/cleared_order_page.dart';
+import 'package:shabusystem/screen/cleared_order_popup.dart';
 import 'package:shabusystem/screen/detail_order_popup.dart';
+import 'package:shabusystem/screen/orderpage.dart';
 import 'package:shabusystem/screen/stockingpage.dart';
 
-class orderpage extends StatefulWidget {
-  const orderpage({Key? key}) : super(key: key);
+class clearedPderpage extends StatefulWidget {
+  const clearedPderpage({Key? key}) : super(key: key);
 
   @override
   _orderpageState createState() => _orderpageState();
 }
 
-class _orderpageState extends State<orderpage> {
+class _orderpageState extends State<clearedPderpage> {
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
   final orderCollect = FirebaseFirestore.instance.collection("order");
   // final List<Order> order = [];
@@ -72,47 +73,21 @@ class _orderpageState extends State<orderpage> {
                         height: 40,
                         child: TextButton(
                           style: TextButton.styleFrom(
-                            side:
-                                BorderSide(color: Colors.deepOrange, width: 3),
+                            side: BorderSide(color: Colors.deepOrange, width: 3),
                             padding: const EdgeInsets.all(16.0),
                             primary: Colors.deepOrange,
                             textStyle: const TextStyle(fontSize: 15),
                           ),
-                          child: const Text('Stocking'),
+                          child: const Text('Ordering'),
                           onPressed: () {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => const stockingpage()),
+                                  builder: (context) => const orderpage()),
                             );
                           },
                         ),
                       ),
-                      // Container(
-                      //   margin: EdgeInsets.only(top: 10, right: 100),
-                      //   height: 40,
-                      //   child: TextButton(
-                      //     style: TextButton.styleFrom(
-                      //       backgroundColor: Colors.deepOrange,
-                      //       padding: const EdgeInsets.all(16.0),
-                      //       primary: Colors.white,
-                      //       textStyle: const TextStyle(fontSize: 15),
-                      //     ),
-                      //     child: const Text('Delete all order'),
-                      //     onPressed: () async {
-                      //       final orders = await FirebaseFirestore.instance
-                      //           .collection("order")
-                      //           .get();
-                      //       for (var order in orders.docs) {
-                      //         // print(order.id);
-                      //         await FirebaseFirestore.instance
-                      //             .collection("order")
-                      //             .doc(order.id)
-                      //             .delete();
-                      //       }
-                      //     },
-                      //   ),
-                      // ),
                       Container(
                         margin: EdgeInsets.only(top: 10, right: 100),
                         height: 40,
@@ -123,13 +98,18 @@ class _orderpageState extends State<orderpage> {
                             primary: Colors.white,
                             textStyle: const TextStyle(fontSize: 15),
                           ),
-                          child: const Text('Cleared order'),
-                          onPressed: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => const clearedPderpage()),
-                            );
+                          child: const Text('Delete all order'),
+                          onPressed: () async {
+                            final orders = await FirebaseFirestore.instance
+                                .collection("order")
+                                .get();
+                            for (var order in orders.docs) {
+                              // print(order.id);
+                              await FirebaseFirestore.instance
+                                  .collection("order")
+                                  .doc(order.id)
+                                  .delete();
+                            }
                           },
                         ),
                       ),
@@ -173,7 +153,7 @@ class _orderpageState extends State<orderpage> {
                     int i = 0;
                     snapshot.data!.docs.forEach((element) {
                       i++;
-                      if (!(element.data() as dynamic)["status"]) {
+                      if ((element.data() as dynamic)["status"]) {
                         final order = Order.fromJson(element.data());
                         order.count = i;
                         orders.add(order);
@@ -305,7 +285,7 @@ class _orderpageState extends State<orderpage> {
                                                             MaterialPageRoute(
                                                                 builder:
                                                                     (context) =>
-                                                                        DetailOrderPopup(
+                                                                        ClearedOrderDetail(
                                                                           menu:
                                                                               menu,
                                                                           order:

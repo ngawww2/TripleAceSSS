@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shabusystem/screen/cleared_order_page.dart';
 import 'package:shabusystem/screen/detail_order_popup.dart';
 import 'package:shabusystem/screen/login.dart';
 import 'package:shabusystem/screen/menupage.dart';
@@ -21,7 +22,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: orderpage(), 
+      home: loginpage(), 
     );
   }
 }

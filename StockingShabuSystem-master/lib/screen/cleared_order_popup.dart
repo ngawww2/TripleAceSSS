@@ -2,20 +2,21 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:shabusystem/model/menu.dart';
 import 'package:shabusystem/model/order.dart';
-import 'package:shabusystem/screen/orderpage.dart';
 import 'package:uuid/uuid.dart';
+
+import 'cleared_order_page.dart';
 
 var uuid = Uuid();
 
-class DetailOrderPopup extends StatefulWidget {
+class ClearedOrderDetail extends StatefulWidget {
   final Menu menu;
   final Order order;
-  DetailOrderPopup({required this.menu, required this.order});
+  ClearedOrderDetail({required this.menu, required this.order});
   @override
-  State<DetailOrderPopup> createState() => _ExitConfirmationDialogState();
+  State<ClearedOrderDetail> createState() => _ExitConfirmationDialogState();
 }
 
-class _ExitConfirmationDialogState extends State<DetailOrderPopup> {
+class _ExitConfirmationDialogState extends State<ClearedOrderDetail> {
   Widget build(BuildContext context) {
     return Dialog(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
@@ -93,39 +94,21 @@ class _ExitConfirmationDialogState extends State<DetailOrderPopup> {
               mainAxisSize: MainAxisSize.min,
               children: <Widget>[
                 Container(
-                  margin: EdgeInsets.only(right: 10),
                   width: 100,
                   height: 30,
                   color: Colors.white,
                   child: FlatButton(
-                    onPressed: () {
+                    onPressed: ()  {
                       Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => const orderpage()),
+                                  builder: (context) => const clearedPderpage()),
                             );
                     },
                     child: Text('Back'),
                     textColor: Colors.deepOrange,
                   ),
                 ),
-                Container(
-                  width: 100,
-                  height: 30,
-                  color: Colors.white,
-                  child: FlatButton(
-                    onPressed: () async {
-                      await FirebaseFirestore.instance
-                          .collection("order")
-                          .doc(widget.order.ID)
-                          .update({"status" : true});
-                      Navigator.of(context).pop();
-                    },
-                    child: Text('Clear'),
-                    textColor: Colors.deepOrange,
-                  ),
-                ),
-                
               ],
             )
           ],
