@@ -73,17 +73,17 @@ class _ExitConfirmationDialogState extends State<ExitConfirmationDialog> {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: <Widget>[
                     new FloatingActionButton(
+                      onPressed: minus,
+                      child: new Icon(Icons.remove, color: Colors.black),
+                      backgroundColor: Colors.white,
+                    ),
+                    new Text('$_n', style: new TextStyle(fontSize: 60.0)),
+                    new FloatingActionButton(
                       onPressed: add,
                       child: new Icon(
                         Icons.add,
                         color: Colors.black,
                       ),
-                      backgroundColor: Colors.white,
-                    ),
-                    new Text('$_n', style: new TextStyle(fontSize: 60.0)),
-                    new FloatingActionButton(
-                      onPressed: minus,
-                      child: new Icon(Icons.remove, color: Colors.black),
                       backgroundColor: Colors.white,
                     ),
                   ],
@@ -119,7 +119,7 @@ class _ExitConfirmationDialogState extends State<ExitConfirmationDialog> {
                 ),
                 RaisedButton(
                   onPressed: () async {
-                                        // print(_n);
+                    // print(_n);
                     final _am = Menu.fromJson(await menu.doc(widget.ID).get());
                     final amount = _am.amount + _n;
                     await menu.doc(widget.ID).update({'amount': amount});

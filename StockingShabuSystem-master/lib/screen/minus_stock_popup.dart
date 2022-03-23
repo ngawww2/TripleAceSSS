@@ -6,17 +6,16 @@ import 'package:uuid/uuid.dart';
 
 var uuid = Uuid();
 
-class CustomerOrderPopup extends StatefulWidget {
+class MinusStockPopup extends StatefulWidget {
   final String name;
   final String image;
   final String ID;
-  CustomerOrderPopup(
-      {required this.name, required this.image, required this.ID});
+  MinusStockPopup({required this.name, required this.image, required this.ID});
   @override
-  State<CustomerOrderPopup> createState() => _ExitConfirmationDialogState();
+  State<MinusStockPopup> createState() => _ExitConfirmationDialogState();
 }
 
-class _ExitConfirmationDialogState extends State<CustomerOrderPopup> {
+class _ExitConfirmationDialogState extends State<MinusStockPopup> {
   int _n = 1;
   CollectionReference menu = FirebaseFirestore.instance.collection('menu');
   CollectionReference order = FirebaseFirestore.instance.collection('order');
@@ -81,7 +80,6 @@ class _ExitConfirmationDialogState extends State<CustomerOrderPopup> {
                       child: new Icon(Icons.remove, color: Colors.black),
                       backgroundColor: Colors.white,
                     ),
-                    
                     new Text('$_n', style: new TextStyle(fontSize: 60.0)),
                     new FloatingActionButton(
                       onPressed: add,
@@ -127,12 +125,19 @@ class _ExitConfirmationDialogState extends State<CustomerOrderPopup> {
                     // print(_n);
                     final _am = Menu.fromJson(await menu.doc(widget.ID).get());
                     final amount = _am.amount - _n;
-                    
+
                     print(amount);
                     final id = uuid.v4();
                     final prefs = await SharedPreferences.getInstance();
                     final String? username = prefs.getString('username');
-                    await order.doc(id).set({'ID' : id , 'table' : "$username", 'dateTime' : DateTime.now(), 'status' : false, 'amount' : _n , 'menuID' : widget.ID});
+                    await order.doc(id).set({
+                      'ID': id,
+                      'table': "$username",
+                      'dateTime': DateTime.now(),
+                      'status': false,
+                      'amount': _n,
+                      'menuID': widget.ID
+                    });
                     await menu.doc(widget.ID).update({'amount': amount});
                     return Navigator.of(context).pop(true);
                   },

@@ -158,22 +158,43 @@ class _stockingpageState extends State<stockingpage> {
                                                   color: Colors.grey),
                                             ),
                                           ),
-                                          Container(
-                                            margin:
-                                                EdgeInsets.only(top: 55, left: 120),
-                                            width: 100,
-                                            height: 100,
-                                            child: IconButton(
-                                                onPressed: () async {
-                                                  return await DialogHelper.exit(
-                                                      context,
-                                                      name: "${m.name}",
-                                                      image: "${m.image}",
-                                                      ID: "${m.ID}");
-                                                },
-                                                icon: Image.asset(
-                                                  'assets/Icon/Plusbutton.png',
-                                                )),
+                                          Row(
+                                            children: [
+                                              Container(
+                                                margin:
+                                                    EdgeInsets.only(top: 55, left: 5),
+                                                width: 100,
+                                                height: 100,
+                                                child: IconButton(
+                                                    onPressed: () async {
+                                                      return await DialogHelper.Minus_Stock_Popup(
+                                                          context,
+                                                          name: "${m.name}",
+                                                          image: "${m.image}",
+                                                          ID: "${m.ID}");
+                                                    },
+                                                    icon: Image.asset(
+                                                      'assets/Icon/minusButton.png',
+                                                    )),
+                                              ),
+                                              Container(
+                                                margin:
+                                                    EdgeInsets.only(top: 55, left: 20),
+                                                width: 100,
+                                                height: 100,
+                                                child: IconButton(
+                                                    onPressed: () async {
+                                                      return await DialogHelper.exit(
+                                                          context,
+                                                          name: "${m.name}",
+                                                          image: "${m.image}",
+                                                          ID: "${m.ID}");
+                                                    },
+                                                    icon: Image.asset(
+                                                      'assets/Icon/Plusbutton.png',
+                                                    )),
+                                              ),
+                                            ],
                                           ),
                                         ],
                                       )
