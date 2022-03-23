@@ -79,7 +79,7 @@ class _stockingpageState extends State<stockingpage> {
                 alignment: Alignment.topLeft,
                 margin: EdgeInsets.only(top: 0, left: 20),
                 child: Text(
-                  'Tuesday 2 Feb, 2021',
+                  'wednesday 23 Mar, 2022',
                   style: GoogleFonts.beVietnamPro(
                       fontWeight: FontWeight.normal,
                       fontSize: 8,

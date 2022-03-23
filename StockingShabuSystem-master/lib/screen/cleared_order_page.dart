@@ -121,7 +121,7 @@ class _orderpageState extends State<clearedPderpage> {
                 alignment: Alignment.topLeft,
                 margin: EdgeInsets.only(top: 0, left: 100),
                 child: Text(
-                  'Tuesday 2 Feb, 2021',
+                  'wednesday 23 Mar, 2022',
                   style: GoogleFonts.beVietnamPro(
                       fontWeight: FontWeight.normal,
                       fontSize: 8,
