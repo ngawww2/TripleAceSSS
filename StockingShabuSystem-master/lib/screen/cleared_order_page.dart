@@ -59,7 +59,7 @@ class _orderpageState extends State<clearedPderpage> {
                   Container(
                     margin: EdgeInsets.only(top: 10, left: 100),
                     child: Text(
-                      'Ordering Shabu System',
+                      'Cleared Ordering Shabu System',
                       style: GoogleFonts.beVietnamPro(
                           fontWeight: FontWeight.bold,
                           fontSize: 20,
@@ -249,7 +249,7 @@ class _orderpageState extends State<clearedPderpage> {
                                                       alignment:
                                                           Alignment.center,
                                                       margin: EdgeInsets.only(
-                                                          top: 10, bottom: 60),
+                                                          top: 10),
                                                       child: Text(
                                                         '${o.table}',
                                                         style:
@@ -263,38 +263,116 @@ class _orderpageState extends State<clearedPderpage> {
                                                       ),
                                                     ),
                                                     Container(
-                                                      height: 40,
-                                                      width: 100,
+                                                      width: 200,
+                                                      alignment:
+                                                          Alignment.center,
+                                                      // margin: EdgeInsets.only(
+                                                      //      bottom: 60),
+                                                      child: Text(
+                                                        menu.name,
+                                                        style:
+                                                            GoogleFonts.barlow(
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .bold,
+                                                                fontSize: 20,
+                                                                color: Colors
+                                                                    .black),
+                                                      ),
+                                                    ),
+                                                    Container(
+                                                      width: 200,
+                                                      alignment:
+                                                          Alignment.center,
                                                       margin: EdgeInsets.only(
-                                                          top: 30, left: 100),
-                                                      child: TextButton(
-                                                        style: ButtonStyle(
-                                                          foregroundColor:
-                                                              MaterialStateProperty
-                                                                  .all<Color>(
+                                                          bottom: 40),
+                                                      child: Text(
+                                                        "${o.amount}",
+                                                        style:
+                                                            GoogleFonts.barlow(
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .bold,
+                                                                fontSize: 30,
+                                                                color: Colors
+                                                                    .black),
+                                                      ),
+                                                    ),
+                                                    Row(
+                                                      children: [
+                                                        Container(
+                                                          height: 40,
+                                                          width: 100,
+                                                          margin:
+                                                              EdgeInsets.only(
+                                                                  left: 20),
+                                                          child: TextButton(
+                                                            style: ButtonStyle(
+                                                              foregroundColor:
+                                                                  MaterialStateProperty.all<
+                                                                          Color>(
                                                                       Colors
                                                                           .white),
-                                                          backgroundColor:
-                                                              MaterialStateProperty
-                                                                  .all<Color>(Colors
-                                                                      .deepOrangeAccent),
+                                                              backgroundColor:
+                                                                  MaterialStateProperty.all<
+                                                                          Color>(
+                                                                      Colors
+                                                                          .deepOrangeAccent),
+                                                            ),
+                                                            onPressed: () {
+                                                              Navigator.push(
+                                                                context,
+                                                                MaterialPageRoute(
+                                                                    builder:
+                                                                        (context) =>
+                                                                            DetailOrderPopup(
+                                                                              menu: menu,
+                                                                              order: o,
+                                                                            )),
+                                                              );
+                                                            },
+                                                            child:
+                                                                Text('Detail'),
+                                                          ),
                                                         ),
-                                                        onPressed: () {
-                                                          Navigator.push(
-                                                            context,
-                                                            MaterialPageRoute(
-                                                                builder:
-                                                                    (context) =>
-                                                                        ClearedOrderDetail(
-                                                                          menu:
-                                                                              menu,
-                                                                          order:
-                                                                              o,
-                                                                        )),
-                                                          );
-                                                        },
-                                                        child: Text('Detail'),
-                                                      ),
+                                                        Container(
+                                                          height: 40,
+                                                          width: 100,
+                                                          margin:
+                                                              EdgeInsets.only(
+                                                                  left: 5),
+                                                          child: TextButton(
+                                                            style: ButtonStyle(
+                                                              foregroundColor:
+                                                                  MaterialStateProperty.all<
+                                                                          Color>(
+                                                                      Colors
+                                                                          .white),
+                                                              backgroundColor:
+                                                                  MaterialStateProperty.all<
+                                                                          Color>(
+                                                                      Colors
+                                                                          .deepOrangeAccent),
+                                                            ),
+                                                            onPressed:
+                                                                () async {
+                                                              await FirebaseFirestore
+                                                                  .instance
+                                                                  .collection(
+                                                                      "order")
+                                                                  .doc(o.ID)
+                                                                  .update({
+                                                                "status": true
+                                                              });
+                                                              Navigator.of(
+                                                                      context)
+                                                                  .pop();
+                                                            },
+                                                            child:
+                                                                Text('Clear'),
+                                                          ),
+                                                        )
+                                                      ],
                                                     )
                                                   ],
                                                 )
