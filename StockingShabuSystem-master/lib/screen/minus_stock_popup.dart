@@ -125,19 +125,6 @@ class _ExitConfirmationDialogState extends State<MinusStockPopup> {
                     // print(_n);
                     final _am = Menu.fromJson(await menu.doc(widget.ID).get());
                     final amount = _am.amount - _n;
-
-                    print(amount);
-                    final id = uuid.v4();
-                    final prefs = await SharedPreferences.getInstance();
-                    final String? username = prefs.getString('username');
-                    await order.doc(id).set({
-                      'ID': id,
-                      'table': "$username",
-                      'dateTime': DateTime.now(),
-                      'status': false,
-                      'amount': _n,
-                      'menuID': widget.ID
-                    });
                     await menu.doc(widget.ID).update({'amount': amount});
                     return Navigator.of(context).pop(true);
                   },
