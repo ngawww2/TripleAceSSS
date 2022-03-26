@@ -335,43 +335,6 @@ class _orderpageState extends State<clearedPderpage> {
                                                                 Text('Detail'),
                                                           ),
                                                         ),
-                                                        Container(
-                                                          height: 40,
-                                                          width: 100,
-                                                          margin:
-                                                              EdgeInsets.only(
-                                                                  left: 5),
-                                                          child: TextButton(
-                                                            style: ButtonStyle(
-                                                              foregroundColor:
-                                                                  MaterialStateProperty.all<
-                                                                          Color>(
-                                                                      Colors
-                                                                          .white),
-                                                              backgroundColor:
-                                                                  MaterialStateProperty.all<
-                                                                          Color>(
-                                                                      Colors
-                                                                          .deepOrangeAccent),
-                                                            ),
-                                                            onPressed:
-                                                                () async {
-                                                              await FirebaseFirestore
-                                                                  .instance
-                                                                  .collection(
-                                                                      "order")
-                                                                  .doc(o.ID)
-                                                                  .update({
-                                                                "status": true
-                                                              });
-                                                              Navigator.of(
-                                                                      context)
-                                                                  .pop();
-                                                            },
-                                                            child:
-                                                                Text('Clear'),
-                                                          ),
-                                                        )
                                                       ],
                                                     )
                                                   ],
